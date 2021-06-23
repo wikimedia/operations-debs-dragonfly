@@ -1,0 +1,14 @@
+---
+services:
+  - docker
+sudo: false
+git:
+  depth: false
+language: go
+go:
+  - 1.12.x
+script:
+  - make docker-build
+
+# after_success:
+#   - bash <(curl -s https://codecov.io/bash) || echo "Failed to report code coverage!"
