@@ -1,0 +1,12 @@
+[Unit]
+Description=Proxy between container engine and Dragonfly network
+Documentation=https://d7y.io
+After=network.target
+
+[Service]
+User=dragonfly
+ExecStart=/usr/bin/dfdaemon --dfpath /usr/bin/dfget --workHome /var/lib/dragonfly-dfdaemon
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

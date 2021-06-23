@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! getent passwd dragonfly > /dev/null 2>&1 ; then
+            adduser --quiet --system --group --disabled-login --no-create-home --home /nonexistent dragonfly
+        fi
+        chgrp dragonfly /var/lib/dragonfly-supernode
+        chmod g+w /var/lib/dragonfly-supernode
+    ;;
+esac
+
+#DEBHELPER#

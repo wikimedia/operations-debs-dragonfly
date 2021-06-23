@@ -1,0 +1,12 @@
+[Unit]
+Description=The control server of Dragonfly
+Documentation=https://d7y.io
+After=network.target
+
+[Service]
+User=dragonfly
+ExecStart=/usr/bin/supernode --home-dir /var/lib/dragonfly-supernode
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

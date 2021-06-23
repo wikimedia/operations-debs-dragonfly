@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+include /usr/share/dpkg/pkg-info.mk
+
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+export DH_VERBOSE = 1
+# Don't build dbgsym packages
+export DEB_BUILD_OPTIONS = noddebs
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+PKG = github.com/dragonflyoss/Dragonfly
+DATE = $(shell date "+%Y%m%d-%H:%M:%S")
+
+BUILDFLAGS := -ldflags \
+  " -X $(PKG)/version.version=v$(DEB_VERSION_UPSTREAM)\
+    -X $(PKG)/version.revision=$(SOURCE_DATE_EPOCH)\
+    -X $(PKG)/version.buildDate=$(DATE)"
+
+export DH_GOLANG_BUILDPKG := ${PKG}/cmd/dfget\
+  ${PKG}/cmd/dfdaemon\
+  ${PKG}/cmd/supernode
+
+%:
+	dh $@ --buildsystem=golang --with=golang
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(BUILDFLAGS)
+
+override_dh_auto_build:
+	dh_auto_build -- $(BUILDFLAGS)
+
+override_dh_auto_install:
+	# Don't include go-source in the package
+	dh_auto_install -- --no-source
+
+# Do not run tests, they fail
+override_dh_auto_test:
+
+# No dwz symbols in go, disable
+override_dh_dwz:
+

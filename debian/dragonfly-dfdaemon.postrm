@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+        deluser  --quiet --system dragonfly || true
+        delgroup --quiet --system --only-if-empty dragonfly || true
+    ;;
+    purge)
+        rm -rf /var/lib/dragonfly-dfdaemon
+    ;;
+esac
+
+#DEBHELPER#

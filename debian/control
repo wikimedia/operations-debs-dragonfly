@@ -1,0 +1,43 @@
+Source: dragonfly
+Section: devel
+Priority: optional
+Maintainer: Janis Meybohm <jmeybohm@wikimedia.org>
+Build-Depends: debhelper-compat (= 12),
+               dh-golang,
+               golang-any (>= 2:1.13),
+               git
+Standards-Version: 4.1.3
+Homepage: https://d7y.io
+XS-Go-Import-Path: github.com/dragonflyoss/Dragonfly
+
+Package: dragonfly-dfget
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Client of Dragonfly used to download and upload files
+ dfget is the client of Dragonfly which takes a role of peer in a P2P
+ network. When user triggers a file downloading task, dfget will
+ download the pieces of file from other peers. Meanwhile, it will act
+ as an uploader to support other peers to download pieces from it if
+ it owns them.
+ In addition, dfget has the abilities to provide more advanced
+ functionality, such as network bandwidth limit, transmission
+ encryption and so on.
+
+Package: dragonfly-dfdaemon
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, dragonfly-dfget
+Description: The dfdaemon is a proxy that intercepts image download requests
+ The dfdaemon is a proxy between container engine and registry used for pulling
+ images.
+ .
+ dfdaemon actually calls dfget to download chunks from the p2p nerwork.
+
+Package: dragonfly-supernode
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: The control server of Dragonfly used for scheduling and cdn cache
+ SuperNode is a long-running process with two primary responsibilities: It's
+ the tracker and scheduler in the P2P network that choose appropriate
+ downloading net-path for each peer. It's also a CDN server that caches
+ downloaded data from source to avoid downloading the same files from source
+ repeatedly.
