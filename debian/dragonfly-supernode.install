@@ -1,1 +1,2 @@
-usr/bin/supernode usr/bin/
+usr/bin/supernode usr/bin
+debian/sysusers/dragonfly-supernode.conf usr/lib/sysusers.d

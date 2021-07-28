@@ -1,2 +1,3 @@
 /etc/dragonfly
+/usr/lib/sysusers.d
 /var/lib/dragonfly-supernode
