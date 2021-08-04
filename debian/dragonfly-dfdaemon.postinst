@@ -4,7 +4,9 @@ set -e
 
 case "$1" in
     configure)
-        systemd-sysusers
+        if ! getent passwd dragonfly > /dev/null 2>&1 ; then
+            adduser --quiet --system --group --disabled-login --no-create-home --home /nonexistent dragonfly
+        fi
         chgrp dragonfly /var/lib/dragonfly-dfdaemon
         chmod g+w /var/lib/dragonfly-dfdaemon
     ;;

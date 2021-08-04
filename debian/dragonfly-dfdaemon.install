@@ -1,2 +1,1 @@
-usr/bin/dfdaemon usr/bin
-debian/sysusers/dragonfly-dfdaemon.conf usr/lib/sysusers.d
+usr/bin/dfdaemon usr/bin/

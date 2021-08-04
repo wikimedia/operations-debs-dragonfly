@@ -1,9 +1,3 @@
-dragonfly (1.0.6-2) buster-wikimedia; urgency=medium
-
-  * Create users via systemd-sysusers
-
- -- Janis Meybohm <jmeybohm@wikimedia.org>  Wed, 28 Jul 2021 16:13:13 +0200
-
 dragonfly (1.0.6-1) buster-wikimedia; urgency=medium
 
   * Initial release
